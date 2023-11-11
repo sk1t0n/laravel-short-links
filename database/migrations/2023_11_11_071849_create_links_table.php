@@ -11,8 +11,7 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('links', function (Blueprint $table) {
-            $table->uuid()->primary();
-            $table->string('token')->unique();
+            $table->string('token')->primary();
             $table->string('full_url')->unique();
         });
     }

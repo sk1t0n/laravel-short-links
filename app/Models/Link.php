@@ -2,19 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
     use HasFactory;
-    use HasUuids;
+
+    public $timestamps = false;
 
     public $incrementing = false;
 
+    protected $primaryKey = 'token';
+
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'uuid',
         'token',
         'full_url',
     ];
