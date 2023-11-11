@@ -1,0 +1,14 @@
+includes:
+	- ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+	level: 6
+	paths:
+		- app
+		- tests
+	ignoreErrors:
+		-
+			message: '#Undefined variable: \$this#'
+			paths:
+				- 'tests/*'
+	checkGenericClassInNonGenericObjectType: false
