@@ -1,5 +1,7 @@
 # Short Links
 
+Service for creating short links by the full URL.
+
 ## Install
 
 Set the port in .env file.
