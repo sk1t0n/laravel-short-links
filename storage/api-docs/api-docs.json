@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Short Links API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/create": {
+            "post": {
+                "tags": [
+                    "token"
+                ],
+                "summary": "Create an token by the full URL.",
+                "operationId": "c3cef12dbf26067d24d6f86990e7c88f",
+                "parameters": [
+                    {
+                        "name": "full_url",
+                        "in": "query",
+                        "description": "The full URL",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "CREATED"
+                    }
+                }
+            }
+        },
+        "/{token}": {
+            "get": {
+                "tags": [
+                    "redirect"
+                ],
+                "summary": "Redirect to the full URL.",
+                "operationId": "48f3fb1974f7e9565e9167ebdf58a903",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "The token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "FOUND"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "token"
+        },
+        {
+            "name": "redirect"
+        }
+    ]
+}
