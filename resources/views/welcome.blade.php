@@ -21,7 +21,7 @@
         @csrf
         <div class="col-3"></div>
         <div class="col-4">
-            <input id="full_url" name="full_url" placeholder="Type full url" class="form-control">
+            <input id="full_url" name="full_url" placeholder="Type the full URL" class="form-control">
         </div>
         <div class="col-2">
             <button type="submit" class="btn btn-primary">Send</button>

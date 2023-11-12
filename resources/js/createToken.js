@@ -6,9 +6,16 @@ export function createToken(fullUrl) {
             'Content-Type': 'application/json',
         },
     })
-        .then((response) => response.json())
+        .then((response) => {
+            if (response.redirected) {
+                throw 'Error: invalid url';
+            }
+            return response.json();
+        })
         .then((data) => {
+            console.log(data);
             result = document.getElementById('result');
             result.innerText = `token = ${data.token}`;
-        });
+        })
+        .catch((error) => console.error(error));
 }
