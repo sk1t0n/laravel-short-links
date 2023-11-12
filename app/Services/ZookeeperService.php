@@ -21,8 +21,8 @@ class ZookeeperService
     public function getLastNumberFromRange(array $range, int $nodeNumber): int
     {
         Cache::add("lastNumberFromRangeForNode{$nodeNumber}", $range[0] - 1);
-        Cache::increment('lastNumberFromRangeForNode1');
+        Cache::increment("lastNumberFromRangeForNode{$nodeNumber}");
 
-        return (int) Cache::get('lastNumberFromRangeForNode1');
+        return (int) Cache::get("lastNumberFromRangeForNode{$nodeNumber}");
     }
 }
