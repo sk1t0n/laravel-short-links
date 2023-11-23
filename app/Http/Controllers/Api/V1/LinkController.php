@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LinkRequest;
 use App\Services\LinkService;
 use App\Services\TokenService;
@@ -26,7 +27,7 @@ class LinkController extends Controller
      *     path="/api/v1/create",
      *     summary="Create an token by the full URL.",
      *
-     * @OA\Parameter(
+     *     @OA\Parameter(
      *
      *         @OA\Schema(type="string", default=""),
      *         name="full_url",

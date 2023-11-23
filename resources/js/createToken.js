@@ -15,7 +15,7 @@ export function createToken(fullUrl) {
         .then((data) => {
             console.log(data);
             result = document.getElementById('result');
-            result.innerText = `token = ${data.token}`;
+            result.innerText = `URL: http://127.0.0.1:8000/${data.token}`;
         })
         .catch((error) => console.error(error));
 }

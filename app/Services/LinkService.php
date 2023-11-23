@@ -3,18 +3,23 @@
 namespace App\Services;
 
 use App\Models\Link;
+use App\Repositories\LinkRepository;
 use Illuminate\Support\Facades\Cache;
 
 class LinkService
 {
+    public function __construct(private LinkRepository $linkRepository)
+    {
+    }
+
     public function getLinkByFullUrl(string $url): ?Link
     {
-        return Link::where(['full_url' => $url])->first();
+        return $this->linkRepository->findByFullUrl($url);
     }
 
     public function getLinkByToken(string $token): ?Link
     {
-        return Link::where(['token' => $token])->first();
+        return $this->linkRepository->findByToken($token);
     }
 
     public function createLink(string $token, string $fullUrl): void

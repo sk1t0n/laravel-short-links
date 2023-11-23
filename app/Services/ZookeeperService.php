@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 class ZookeeperService
 {
     /**
-     * @return array<int>
+     * @return array<int, int>
      */
     public function getRange(int $nodeNumber): array
     {
@@ -16,7 +16,7 @@ class ZookeeperService
     }
 
     /**
-     * @param array<int> $range
+     * @param array<int, int> $range
      */
     public function getLastNumberFromRange(array $range, int $nodeNumber): int
     {
