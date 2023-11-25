@@ -9,12 +9,13 @@ use App\Services\TokenService;
 use App\Services\ZookeeperService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Info(title="Short Links API", version="1.0")
+ * @OA\Info(title="Short Links API", version="1.0.0")
  *
  * @OA\Tag(name="token")
  * @OA\Tag(name="redirect")
@@ -55,12 +56,12 @@ class LinkController extends Controller
         $validated = $request->validated();
         $fullUrl = $validated['full_url'];
         if (Cache::has($fullUrl)) {
-            return response()->json(['token' => Cache::get($fullUrl)], 200);
+            return response()->json(['token' => Cache::get($fullUrl)], Response::HTTP_OK);
         }
 
         $link = $linkService->getLinkByFullUrl($fullUrl);
         if ($link) {
-            return response()->json(['token' => $link->token], 200);
+            return response()->json(['token' => $link->token], Response::HTTP_OK);
         }
 
         $range = $zookeeperService->getRange(1);
@@ -68,7 +69,7 @@ class LinkController extends Controller
         $token = $tokenService->createToken($lastNumberFromRange);
         $linkService->createLink($token, $fullUrl);
 
-        return response()->json(['token' => $token], 201);
+        return response()->json(['token' => $token], Response::HTTP_CREATED);
     }
 
     /**
@@ -103,9 +104,9 @@ class LinkController extends Controller
         $link = $linkService->getLinkByToken($token);
 
         if (! $link) {
-            return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return Redirect::away($link->full_url, 302);
+        return Redirect::away($link->full_url, Response::HTTP_FOUND);
     }
 }
